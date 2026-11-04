@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jai Ochoa | Web developer, learning security</title>
+  <meta name="description" content="John Jairuh Ochoa. BSIT student and web developer learning security by finding out which of his own assumptions are wrong.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M26 6H6v36h36V26' fill='none' stroke='%231F1B1A' stroke-width='4' stroke-linecap='square'/%3E%3Crect x='34' y='2' width='11' height='11' fill='%23A83232'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brick: { DEFAULT: '#A83232', deep: '#8A2626' },
+            paper: '#FAFAFA',
+            ink: '#1F1B1A',
+            muted: '#6B6461',
+            line: '#E7E2DF'
+          },
+          fontFamily: {
+            serif: ['"Source Serif 4"', 'Georgia', 'Cambria', 'serif'],
+            sans: ['"Instrument Sans"', '"Segoe UI"', 'Tahoma', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-paper font-sans text-ink antialiased selection:bg-brick selection:text-white">
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
+  <script type="text/babel" data-presets="react" src="app.jsx"></script>
+</body>
+</html>
