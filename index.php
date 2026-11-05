@@ -11,15 +11,7 @@
     </p>
   </div>
   <div class="hero-art">
-    <img src="assets/hero.png" alt="Black and white manga-style illustration of a man with wild, spiky dark hair looking straight ahead">
-  </div>
-</section>
-
-<section class="ticker" aria-label="Languages and tools">
-  <div class="track">
-    <?php for ($i = 0; $i < 2; $i++): foreach ($skills as $group): foreach ($group as $s): ?>
-      <span><img src="<?= icon($s[1]) ?>" alt="" onerror="this.style.display='none'"><?= h($s[0]) ?></span>
-    <?php endforeach; endforeach; endfor; ?>
+    <img src="assets/hero.png" alt="Black and white illustration of a person with dark shaggy hair and heavy-lidded eyes">
   </div>
 </section>
 

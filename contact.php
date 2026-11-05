@@ -7,7 +7,7 @@
     <li><a href="mailto:<?= h($email) ?>"><span>Email</span><?= h($email) ?></a></li>
     <li><a href="<?= h($github) ?>" target="_blank" rel="noopener"><span>GitHub</span>github.com/zayhub13</a></li>
     <li><a href="<?= h($linkedin) ?>" target="_blank" rel="noopener"><span>LinkedIn</span>Connect with me</a></li>
-    <li><a href="assets/resume.pdf" target="_blank" rel="noopener"><span>Resume</span>View it in your browser</a></li>
+    <li><a href="assets/resume.pdf" target="_blank" rel="noopener"><span>Resume</span>View resume</a></li>
   </ul>
 </section>
 

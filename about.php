@@ -2,12 +2,32 @@
 
 <section class="page">
   <h1 class="page-title">About</h1>
-  <div class="prose narrow">
+  <div class="about">
     <p class="big">I build web systems from the database up.</p>
-    <p>A typical project of mine starts as an ERD, turns into a normalized MySQL schema with stored procedures, gets a PHP back end, and ends as pages people can use without a manual. HTML, CSS and JavaScript on the front, PHP and MySQL behind them, and Java when the problem calls for objects and design patterns.</p>
-    <p>I like the parts nobody screenshots. Getting a schema to third normal form. Deciding where input gets checked. Reading the actual reason a page returns a 500 instead of guessing. Most web bugs live at a boundary: a form, a request, a login. I watch those closely, because that is where my assumptions stop holding.</p>
-    <p>That habit is pulling me toward security. I am starting with networking and the web attacks I should be defending against, and I will write about it here when I have something real to show.</p>
-    <p>I also design. Logos, jersey graphics and branding for clients, so I can take a page from layout to working code without waiting on anyone.</p>
+    <p class="short">An ERD, a normalized MySQL schema, a PHP back end, and pages people can use without a manual. I pay the most attention to forms, requests and logins, because that is where a system's assumptions break. I am now moving into security, networking first.</p>
+
+    <dl class="fields">
+      <div><dt>Based in</dt><dd>Valenzuela City</dd></div>
+      <div><dt>Working as</dt><dd>Freelance web developer and graphic designer since 2024: client sites, logos, jersey graphics, branding.</dd></div>
+      <div><dt>Education</dt><dd>BS Information Technology, Pamantasan ng Lungsod ng Valenzuela, 2023 to present.</dd></div>
+      <div><dt>Focus</dt><dd>Full-stack web with PHP and MySQL, Java OOP, database design, network design.</dd></div>
+      <div><dt>Spoken</dt><dd>English and Filipino.</dd></div>
+    </dl>
+
+    <h2 class="skills-title">Skills</h2>
+    <?php $n = 0; foreach ($skills as $group => $items): ?>
+      <div class="skill-group">
+        <h3><?= h($group) ?></h3>
+        <ul class="chips">
+          <?php foreach ($items as $s): ?>
+            <li class="chip" style="--i:<?= $n++ ?>">
+              <?php if ($s[1]): ?><img src="<?= icon($s[1]) ?>" alt="" width="24" height="24" onerror="this.style.display='none'"><?php endif; ?>
+              <?= h($s[0]) ?>
+            </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+    <?php endforeach; ?>
   </div>
 </section>
 
