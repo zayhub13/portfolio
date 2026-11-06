@@ -10,6 +10,12 @@ function logo($s = 40) {
   return '<svg width="' . $s . '" height="' . $s . '" viewBox="0 0 48 48" fill="currentColor" role="img" aria-label="Mark: a crosshair with four long spikes over two rings"><circle cx="24" cy="24" r="13.5" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="24" cy="24" r="7.5" fill="none" stroke="currentColor" stroke-width="2.2"/>' . $spikes . '</svg>';
 }
 
+// Cache-busting: the browser re-downloads a file whenever it changes
+function asset($path) {
+  $f = __DIR__ . '/../' . $path;
+  return $path . (is_file($f) ? '?v=' . filemtime($f) : '');
+}
+
 function icon($name, $variant = 'original') {
   return 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/' . $name . '/' . $name . '-' . $variant . '.svg';
 }
@@ -35,36 +41,27 @@ $skills = [
   'Networking' => [['Cisco Packet Tracer', null], ['OSPF, RIPv2, EIGRP', null], ['DHCP and DNS', null]],
 ];
 
-// Empty strings are skipped on render, so nothing gets invented.
+$certifications = [
+  ['title' => 'Descriptive and Inferential Statistics with Python', 'date' => 'April 14, 2026', 'file' => 'python-statistics.png'],
+  ['title' => 'Python Libraries for Data Analysis', 'date' => 'April 8, 2026', 'file' => 'python-libraries-data-analysis.png'],
+  ['title' => 'Mastering SQL Functions and Clauses with Taylor Swift', 'date' => 'February 26, 2026', 'file' => 'sql-functions-clauses.png'],
+  ['title' => 'Learning SQL Joins with Taylor Swift', 'date' => 'February 16, 2026', 'file' => 'sql-joins.png'],
+  ['title' => 'Intro to SQL with Taylor Swift', 'date' => 'January 29, 2026', 'file' => 'intro-to-sql.png'],
+];
+
 $projects = [
   [
-    'name' => 'Julie Repol Beauty Salon',
-    'stack' => 'PHP, MySQL, plain CSS',
-    'problem' => 'A salon needed online reservations, and its staff needed one admin view of every booking.',
-    'tried' => 'The admin dashboard kept returning an HTTP 500. The fault was the order I had put the authentication steps in, not the logic inside them.',
-    'shipped' => 'A reservation flow for customers and an admin dashboard for staff. Queries use prepared statements, and anything printed back to a page goes through htmlspecialchars().',
-    'redo_label' => 'What I would change',
-    'redo' => 'Write the access check before any page exists, and test with a wrong login before a right one.',
-    'note' => 'The source was lost in a deletion and I have no backup.',
+    'slug' => 'mdas-calculator',
+    'name' => 'MDAS Calculator',
+    'description' => 'A Java console calculator for multiplication, division, addition, and subtraction, with a check to prevent division by zero.',
+    'stack' => 'Java',
+    'github_url' => 'https://github.com/Miitsunoo/MDASCalculatorCC3',
   ],
   [
-    'name' => 'Enterprise network in Packet Tracer',
-    'stack' => 'Cisco Packet Tracer',
-    'problem' => 'Eight subnets and eighty PCs have to reach each other and a web server without anyone typing eighty addresses by hand.',
-    'tried' => '', // add: what you tried that failed
-    'shipped' => 'A topology with 8 subnets, 80 DHCP-assigned PCs, DNS, and a web server at www.ochoa.com. OSPF, RIPv2 and EIGRP run side by side with route redistribution between them.',
-    'redo_label' => 'What I would change',
-    'redo' => '', // add: one thing you would do differently
-    'note' => 'The file was lost in the same deletion.',
-  ],
-  [
-    'name' => 'Cellphone repair job order system',
-    'stack' => 'Group thesis, four of us. In design, not built.',
-    'problem' => 'Jake Cellphone Repair Shop in Karuhatan needs customers to submit repair requests and follow progress, and staff to manage job orders.',
-    'tried' => '',
-    'shipped' => 'Not shipped. So far: requirements, an ERD, use cases for the owner, staff and customers, and wireframes.',
-    'redo_label' => 'What I am watching',
-    'redo' => "Customers look up a repair with a reference number. If those numbers count up one at a time, anyone can read anyone else's repair status. How they get generated is a security question I want answered before anyone writes the page.",
-    'note' => '',
+    'slug' => 'bunker-management-system',
+    'name' => 'Bunker Management System',
+    'description' => 'A Java console-based management system with occupant sign-in, keycard access checks, occupant profiles, work duties, and room reservations.',
+    'stack' => 'Java',
+    'github_url' => 'https://github.com/Miitsunoo/-M4-M1WithPaymentFramework',
   ],
 ];
