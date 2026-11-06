@@ -1,10 +1,8 @@
 <?php
-<link rel="icon" type="image/svg+xml" href="<?= asset('assets/favicon.svg') ?>">
 require_once __DIR__ . '/data.php';
 $nav = ['index.php' => 'Home', 'projects.php' => 'Projects', 'about.php' => 'About', 'contact.php' => 'Contact'];
 $current = basename($_SERVER['PHP_SELF']);
 $title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Full Stack Developer';
-<link rel="icon" type="image/svg+xml" href="<?= asset('assets/favicon.svg') ?>">
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,6 +10,7 @@ $title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Full Stack Devel
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= h($title) ?></title>
+  <link rel="icon" type="image/svg+xml" href="<?= asset('assets/favicon.svg') ?>">
   <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
