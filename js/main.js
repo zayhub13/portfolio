@@ -116,16 +116,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const contactForm = document.querySelector('[data-contact-form]');
   if (contactForm) {
-    contactForm.addEventListener('submit', (event) => {
+    contactForm.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const fields = new FormData(contactForm);
-      const recipient = contactForm.dataset.recipient;
-      const subject = 'Portfolio message from ' + fields.get('name');
-      const body = 'From: ' + fields.get('name') + ' (' + fields.get('email') + ')\n\n' + fields.get('message');
       const status = contactForm.querySelector('[data-form-status]');
-      status.textContent = 'Opening your email app with this message. Please send it there to complete delivery.';
-      window.location.href = 'mailto:' + recipient +
-        '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      const button = contactForm.querySelector('[type="submit"]');
+      button.disabled = true;
+      status.textContent = 'Sending your message…';
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { Accept: 'application/json' }
+        });
+        const result = await response.json();
+        status.textContent = result.message;
+        status.classList.toggle('form-status--error', !result.ok);
+        status.classList.toggle('form-status--success', result.ok);
+        if (result.ok) contactForm.reset();
+      } catch (error) {
+        status.textContent = 'Could not reach the mail server. Please try again later.';
+        status.classList.add('form-status--error');
+      } finally {
+        button.disabled = false;
+      }
     });
   }
 

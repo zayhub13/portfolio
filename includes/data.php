@@ -31,6 +31,7 @@ function social($name) {
 }
 
 $email = 'johnjairuhochoa@gmail.com';
+$gmailCompose = 'https://mail.google.com/mail/?view=cm&fs=1&to=' . rawurlencode($email) . '&su=portfolio';
 $github = 'https://github.com/zayhub13';
 $linkedin = 'https://www.linkedin.com/in/john-jairuh-ochoa-a94262293/';
 
