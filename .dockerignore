@@ -1,0 +1,8 @@
+.git
+.vercel
+.env
+.env.*
+vendor
+composer.phar
+tools
+README.md
