@@ -2,7 +2,7 @@
 require_once __DIR__ . '/data.php';
 $nav = ['index.php' => 'Home', 'projects.php' => 'Projects', 'about.php' => 'About', 'contact.php' => 'Contact'];
 $current = basename($_SERVER['PHP_SELF']);
-$title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Web developer';
+$title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Full Stack Developer';
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,22 +14,19 @@ $title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Web developer';
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/main.js" defer></script>
+  <link rel="stylesheet" href="<?= asset('css/style.css') ?>">
+  <script src="<?= asset('js/main.js') ?>" defer></script>
 </head>
 <body>
 <header class="nav">
   <a class="brand" href="index.php"><?= logo(38) ?><span>Jai Ochoa</span></a>
-  <nav>
-    <ul class="menu" id="menu">
-      <?php foreach ($nav as $file => $label): ?>
-        <li><a href="<?= $file ?>"<?= $file === $current ? ' aria-current="page"' : '' ?>><?= $label ?></a></li>
-      <?php endforeach; ?>
-    </ul>
+  <nav class="nav-links" aria-label="Main navigation">
+    <?php $navIndex = 0; foreach ($nav as $file => $label): ?>
+      <a href="<?= $file ?>" style="--nav-index:<?= $navIndex++ ?>"<?= $file === $current ? ' aria-current="page"' : '' ?>><?= $label ?></a>
+    <?php endforeach; ?>
   </nav>
   <button class="theme" type="button" aria-label="Switch between light and dark mode" aria-pressed="false">
     <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
   </button>
-  <button class="burger" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
 </header>
 <main>
