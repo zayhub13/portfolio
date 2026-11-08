@@ -14,6 +14,9 @@
             <?php if (!empty($p['github_url'])): ?>
               <a class="project-github" href="<?= h($p['github_url']) ?>" target="_blank" rel="noopener"><?= social('github') ?><span>View repository</span></a>
             <?php endif; ?>
+            <?php if (!empty($p['live_url'])): ?>
+              <a class="link" href="<?= h($p['live_url']) ?>" target="_blank" rel="noopener">View live site</a>
+            <?php endif; ?>
             <?php if (!empty($p['file'])): ?>
               <a class="link" href="<?= h($p['file']) ?>" download>Download project</a>
             <?php endif; ?>
