@@ -18,22 +18,4 @@
   </div>
 </section>
 
-<section class="page">
-  <div class="rail">
-    <h2>Projects</h2>
-    <div>
-      <?php if ($projects): ?>
-        <ul class="index-list">
-          <?php foreach ($projects as $p): ?>
-            <li><a href="projects.php#<?= h($p['slug']) ?>"><span><?= h($p['name']) ?></span><small><?= h($p['stack']) ?></small></a></li>
-          <?php endforeach; ?>
-        </ul>
-      <?php else: ?>
-        <p class="project-empty">Small projects where I practice programming and problem-solving.</p>
-      <?php endif; ?>
-      <p class="more"><a class="link" href="projects.php">Projects</a></p>
-    </div>
-  </div>
-</section>
-
 <?php require __DIR__ . '/includes/footer.php'; ?>

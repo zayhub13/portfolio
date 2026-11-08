@@ -52,6 +52,14 @@ $certifications = [
 
 $projects = [
   [
+    'slug' => 'pierc-exe',
+    'name' => 'PIERC.EXE',
+    'description' => 'A piercing business inquiry website where visitors can submit service requests by email. It does not process payments.',
+    'stack' => 'React, JavaScript, Tailwind CSS, Vercel Serverless Functions, Resend',
+    'github_url' => 'https://github.com/zayhub13/pierc.exe',
+    'live_url' => 'https://piercexe.vercel.app/',
+  ],
+  [
     'slug' => 'mdas-calculator',
     'name' => 'MDAS Calculator',
     'description' => 'A Java console calculator for multiplication, division, addition, and subtraction, with a check to prevent division by zero.',
