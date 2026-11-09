@@ -23,7 +23,7 @@ $title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Full Stack Devel
   <a class="brand" href="index.php"><?= logo(38) ?><span>Jai Ochoa</span></a>
   <nav class="nav-links" aria-label="Main navigation">
     <?php $navIndex = 0; foreach ($nav as $file => $label): ?>
-      <a href="<?= $file ?>" style="--nav-index:<?= $navIndex++ ?>"<?= $file === $current ? ' aria-current="page"' : '' ?>><?= $label ?></a>
+      <a href="<?= $file === 'projects.php' && $current === 'index.php' ? '#projects' : $file ?>" style="--nav-index:<?= $navIndex++ ?>"<?= $file === $current ? ' aria-current="page"' : '' ?>><?= $label ?></a>
     <?php endforeach; ?>
   </nav>
   <button class="theme" type="button" aria-label="Switch between light and dark mode" aria-pressed="false">
