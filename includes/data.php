@@ -39,6 +39,7 @@ $skills = [
   'Languages' => [['HTML', 'html5'], ['CSS', 'css3'], ['JavaScript', 'javascript'], ['PHP', 'php'], ['Java', 'java'], ['Python', 'python']],
   'Databases' => [['MySQL', 'mysql'], ['MongoDB', 'mongodb']],
   'Tools' => [['VS Code', 'vscode'], ['Git', 'git'], ['GitHub', 'github'], ['Figma', 'figma'], ['Canva', 'canva']],
+  'AI tools' => [['ChatGPT', null], ['GitHub Copilot', null], ['Google Gemini', null], ['Claude', null]],
   'Networking' => [['Cisco Packet Tracer', null], ['OSPF, RIPv2, EIGRP', null], ['DHCP and DNS', null]],
 ];
 

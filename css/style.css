@@ -90,6 +90,14 @@ h1 { font: 600 clamp(2.2rem, 8vw, 5.5rem) / 1.05 var(--serif); letter-spacing: -
   .hero-art { width: clamp(18rem, 30vw, 26rem); }
   .hero-text h1 { max-width: 11ch; }
 }
+.hero#home { min-height: calc(100vh - 7rem); min-height: calc(100svh - 7rem); align-content: center; }
+.home-projects { border-top: 1px solid var(--rule); scroll-margin-top: 7rem; }
+.home-projects .page { max-width: 88rem; margin-inline: auto; }
+.home-projects .page-title { font-size: clamp(2rem, 6vw, 3.8rem); }
+@media (min-width: 48em) {
+  .hero#home { min-height: calc(100vh - 4.25rem); min-height: calc(100svh - 4.25rem); }
+  .home-projects { scroll-margin-top: 4.5rem; }
+}
 
 /* Shared layout */
 .page { padding: 1.25rem var(--pad) 1.75rem; }
