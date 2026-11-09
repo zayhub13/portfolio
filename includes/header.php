@@ -2,6 +2,8 @@
 require_once __DIR__ . '/data.php';
 $nav = ['index.php' => 'Home', 'projects.php' => 'Projects', 'about.php' => 'About', 'contact.php' => 'Contact'];
 $current = basename($_SERVER['PHP_SELF']);
+$homePage = $current === 'index.php';
+$sectionIds = ['index.php' => 'home', 'projects.php' => 'projects', 'about.php' => 'about', 'contact.php' => 'contact'];
 $title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Full Stack Developer';
 ?>
 <!doctype html>
@@ -20,10 +22,10 @@ $title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Full Stack Devel
 </head>
 <body>
 <header class="nav">
-  <a class="brand" href="index.php"><?= logo(38) ?><span>Jai Ochoa</span></a>
+  <a class="brand" href="<?= $homePage ? '#home' : 'index.php#home' ?>"><?= logo(38) ?><span>Jai Ochoa</span></a>
   <nav class="nav-links" aria-label="Main navigation">
-    <?php $navIndex = 0; foreach ($nav as $file => $label): ?>
-      <a href="<?= $file === 'projects.php' && $current === 'index.php' ? '#projects' : $file ?>" style="--nav-index:<?= $navIndex++ ?>"<?= $file === $current ? ' aria-current="page"' : '' ?>><?= $label ?></a>
+    <?php $navIndex = 0; foreach ($nav as $file => $label): $sectionId = $sectionIds[$file]; ?>
+      <a href="<?= $homePage ? '#' . $sectionId : 'index.php#' . $sectionId ?>" data-section-link="<?= $sectionId ?>" style="--nav-index:<?= $navIndex++ ?>"<?= ($homePage && $file === 'index.php') || (!$homePage && $file === $current) ? ' aria-current="page"' : '' ?>><?= $label ?></a>
     <?php endforeach; ?>
   </nav>
   <button class="theme" type="button" aria-label="Switch between light and dark mode" aria-pressed="false">

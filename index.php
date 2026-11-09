@@ -1,13 +1,17 @@
-<?php $title = null; require __DIR__ . '/includes/header.php'; ?>
+<?php
+require __DIR__ . '/includes/contact-state.php';
+$title = null;
+require __DIR__ . '/includes/header.php';
+?>
 
-<section class="hero" id="home">
+<section class="hero landing-section" id="home" aria-labelledby="home-title">
   <div class="hero-art" tabindex="0" role="group" aria-label="Portrait illustration that reveals my photo on hover, focus, or click">
     <img class="art-a" src="<?= asset('assets/hero.png') ?>" alt="Black and white illustration of a person with dark shaggy hair and heavy-lidded eyes">
     <img class="art-b" src="<?= asset('assets/me.jpg') ?>" alt="John Jairuh Ochoa in a white, orange and purple polo, taking a mirror selfie">
     <span class="art-sheen" aria-hidden="true"></span>
   </div>
   <div class="hero-text">
-    <h1>Hello, I'm Jai</h1>
+    <h1 id="home-title">Hello, I'm Jai</h1>
     <p class="sub"><span data-roles='["Full Stack Developer","Cybersecurity Learner","Graphic Designer"]' class="role">Full Stack Developer &amp; Cybersecurity Learner</span></p>
     <p class="location">Valenzuela City, Philippines<span class="clock-wrap" hidden> &middot; <span data-clock></span> local time</span></p>
     <p class="lede">I build web projects and am currently learning cybersecurity and Linux fundamentals. I’m still developing my knowledge through study and hands-on practice.</p>
@@ -18,9 +22,9 @@
   </div>
 </section>
 
-<section class="home-projects" id="projects" aria-labelledby="home-projects-title">
+<section class="landing-section" id="projects" aria-labelledby="projects-title">
   <div class="page">
-    <h2 class="page-title" id="home-projects-title">Projects</h2>
+    <h2 class="page-title" id="projects-title">Projects</h2>
     <p class="intro">A selection of things I’ve built and the tools behind them.</p>
     <?php if ($projects): ?>
       <?php require __DIR__ . '/includes/project-cards.php'; ?>
@@ -33,5 +37,8 @@
     <p class="more"><a class="link" href="projects.php">See all project details</a></p>
   </div>
 </section>
+
+<?php require __DIR__ . '/includes/about-section.php'; ?>
+<?php require __DIR__ . '/includes/contact-section.php'; ?>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>

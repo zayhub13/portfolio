@@ -144,12 +144,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Keep the navigation compact while scrolling and update its progress line.
   const nav = document.querySelector('.nav');
+  const navLinks = [...document.querySelectorAll('[data-section-link]')];
+  const sections = navLinks
+    .map((link) => document.getElementById(link.dataset.sectionLink))
+    .filter((section) => section !== null);
   const bar = () => {
     const h = root.scrollHeight - root.clientHeight;
     const scrollY = window.scrollY || root.scrollTop;
     root.style.setProperty('--p', h > 0 ? (scrollY / h).toFixed(3) : 0);
     if (nav) nav.classList.toggle('scrolled', scrollY > 24);
     if (toTop) toTop.classList.toggle('show', scrollY > 500);
+    if (sections.length) {
+      const marker = (nav ? nav.getBoundingClientRect().height : 0) + window.innerHeight * .35;
+      let active = sections[0];
+      sections.forEach((section) => { if (section.getBoundingClientRect().top <= marker) active = section; });
+      navLinks.forEach((link) => {
+        if (link.dataset.sectionLink === active.id) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+    }
   };
   bar();
   window.addEventListener('scroll', bar, { passive: true });
@@ -311,7 +324,13 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('pageshow', (e) => { if (e.persisted) document.body.classList.remove('leaving'); });
 
   // Scroll reveal
-  const targets = document.querySelectorAll('.index-list li, .project-card, .contact-list li, .more');
+  const targets = document.querySelectorAll(
+    '.landing-section .page-title, .landing-section .intro, .landing-section .project-card, ' +
+    '.landing-section .about .big, .landing-section .about .short, .landing-section .fields > div, ' +
+    '.landing-section .skill-group, .landing-section .cert-wrap, .landing-section .contact-details, ' +
+    '.landing-section .contact-message, .landing-section .contact-list li, .landing-section .more, ' +
+    '.index-list li, .project-card, .contact-list li, .more'
+  );
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
