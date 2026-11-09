@@ -1,13 +1,12 @@
 </main>
 <footer class="footer">
   <div class="foot-brand">
-    <div class="foot-mark" role="img" aria-label="Logo. Move your cursor around it to turn it.">
+    <div class="foot-mark" role="img" aria-label="Portfolio logo">
       <?= logo(96) ?>
     </div>
     <div>
       <p>John Jairuh Ochoa</p>
       <p>Full Stack Developer</p>
-      <p class="hint">Move your cursor around the logo to turn it</p>
     </div>
   </div>
   <ul class="socials">

@@ -17,6 +17,13 @@ function asset($path) {
 }
 
 function icon($name, $variant = 'original') {
+  $brandIcons = [
+    'openai' => 'https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/openai.svg',
+    'githubcopilot' => 'https://cdn.simpleicons.org/githubcopilot',
+    'googlegemini' => 'https://cdn.simpleicons.org/googlegemini',
+    'claude' => 'https://cdn.simpleicons.org/claude',
+  ];
+  if (isset($brandIcons[$name])) return $brandIcons[$name];
   return 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons/' . $name . '/' . $name . '-' . $variant . '.svg';
 }
 
@@ -39,7 +46,7 @@ $skills = [
   'Languages' => [['HTML', 'html5'], ['CSS', 'css3'], ['JavaScript', 'javascript'], ['PHP', 'php'], ['Java', 'java'], ['Python', 'python']],
   'Databases' => [['MySQL', 'mysql'], ['MongoDB', 'mongodb']],
   'Tools' => [['VS Code', 'vscode'], ['Git', 'git'], ['GitHub', 'github'], ['Figma', 'figma'], ['Canva', 'canva']],
-  'AI tools' => [['ChatGPT', null], ['GitHub Copilot', null], ['Google Gemini', null], ['Claude', null]],
+  'AI tools' => [['ChatGPT', 'openai'], ['GitHub Copilot', 'githubcopilot'], ['Google Gemini', 'googlegemini'], ['Claude', 'claude']],
   'Networking' => [['Cisco Packet Tracer', null], ['OSPF, RIPv2, EIGRP', null], ['DHCP and DNS', null]],
 ];
 
