@@ -52,13 +52,19 @@ Container Runtime. This Vercel runtime is currently in beta.
 1. Push the project to a GitHub repository and import it in Vercel. Select the
    project root as the Root Directory; Vercel should detect the root
    `Dockerfile` and use the Container preset.
-2. In Vercel **Project Settings → Environment Variables**, add
-   `BREVO_SMTP_USER`, `BREVO_SMTP_KEY`, and `BREVO_FROM_EMAIL`. Add
-   `BREVO_FROM_NAME` if desired. Use the SMTP login, a newly generated SMTP key,
-   and a sender address verified in Brevo. Never upload the local
+2. In Vercel, open the project's **Analytics** page and select **Enable** under
+   **Web Analytics**. The PHP layout includes Vercel's plain-HTML tracking
+   script; this site does not use the Next.js `@vercel/analytics/next` import
+   or require the npm package.
+3. Add `BREVO_SMTP_USER`, `BREVO_SMTP_KEY`, and `BREVO_FROM_EMAIL` in Vercel
+   **Project Settings → Environment Variables**. Add `BREVO_FROM_NAME` if
+   desired. Use the SMTP login, a newly generated SMTP key, and a sender address
+   verified in Brevo. Never upload the local
    `%LOCALAPPDATA%\JaiPortfolio\mail-config.json` file or set
    `PORTFOLIO_MAIL_CONFIG` on Vercel.
-3. Redeploy after adding the variables, then test the site and contact form.
+4. Redeploy after enabling Analytics and adding the variables, then test the
+   site and contact form. Analytics data should appear in the Vercel dashboard
+   after traffic reaches the deployed site.
 
 The contact form currently uses PHP file-backed sessions for its CSRF token and
 short cooldown. Vercel container instances can scale independently, so sessions

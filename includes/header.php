@@ -1,9 +1,6 @@
 <?php
 require_once __DIR__ . '/data.php';
-$nav = ['index.php' => 'Home', 'projects.php' => 'Projects', 'about.php' => 'About', 'contact.php' => 'Contact'];
-$current = basename($_SERVER['PHP_SELF']);
-$homePage = $current === 'index.php';
-$sectionIds = ['index.php' => 'home', 'projects.php' => 'projects', 'about.php' => 'about', 'contact.php' => 'contact'];
+$nav = ['home' => 'Home', 'projects' => 'Projects', 'about' => 'About', 'contact' => 'Contact'];
 $title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Full Stack Developer';
 ?>
 <!doctype html>
@@ -13,7 +10,9 @@ $title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Full Stack Devel
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= h($title) ?></title>
   <link rel="icon" type="image/svg+xml" href="<?= asset('assets/favicon.svg') ?>">
-  <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+  <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
@@ -22,10 +21,10 @@ $title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Full Stack Devel
 </head>
 <body>
 <header class="nav">
-  <a class="brand" href="<?= $homePage ? '#home' : 'index.php#home' ?>"><?= logo(38) ?><span>Jai Ochoa</span></a>
+  <a class="brand" href="index.php#home"><?= logo(38) ?><span>Jai Ochoa</span></a>
   <nav class="nav-links" aria-label="Main navigation">
-    <?php $navIndex = 0; foreach ($nav as $file => $label): $sectionId = $sectionIds[$file]; ?>
-      <a href="<?= $homePage ? '#' . $sectionId : 'index.php#' . $sectionId ?>" data-section-link="<?= $sectionId ?>" style="--nav-index:<?= $navIndex++ ?>"<?= ($homePage && $file === 'index.php') || (!$homePage && $file === $current) ? ' aria-current="page"' : '' ?>><?= $label ?></a>
+    <?php $navIndex = 0; foreach ($nav as $id => $label): ?>
+      <a href="index.php#<?= $id ?>" style="--nav-index:<?= $navIndex++ ?>"><?= $label ?></a>
     <?php endforeach; ?>
   </nav>
   <button class="theme" type="button" aria-label="Switch between light and dark mode" aria-pressed="false">

@@ -1,17 +1,27 @@
 <?php
-require __DIR__ . '/includes/contact-state.php';
+session_start();
+$_SESSION['contact_csrf'] ??= bin2hex(random_bytes(32));
+
+$sendStatus = $_GET['sent'] ?? '';
+$sendMessages = [
+  'yes' => ['Message sent successfully. Thanks for getting in touch.', 'success'],
+  'no' => ['The message could not be sent right now. Please try again later.', 'error'],
+  'wait' => ['Please wait a moment before sending another message.', 'error'],
+  'invalid' => ['Please check the form and try again.', 'error'],
+];
+
 $title = null;
 require __DIR__ . '/includes/header.php';
 ?>
 
-<section class="hero landing-section" id="home" aria-labelledby="home-title">
+<section class="hero" id="home">
   <div class="hero-art" tabindex="0" role="group" aria-label="Portrait illustration that reveals my photo on hover, focus, or click">
     <img class="art-a" src="<?= asset('assets/hero.png') ?>" alt="Black and white illustration of a person with dark shaggy hair and heavy-lidded eyes">
     <img class="art-b" src="<?= asset('assets/me.jpg') ?>" alt="John Jairuh Ochoa in a white, orange and purple polo, taking a mirror selfie">
     <span class="art-sheen" aria-hidden="true"></span>
   </div>
   <div class="hero-text">
-    <h1 id="home-title">Hello, I'm Jai</h1>
+    <h1>Hello, I'm Jai</h1>
     <p class="sub"><span data-roles='["Full Stack Developer","Cybersecurity Learner","Graphic Designer"]' class="role">Full Stack Developer &amp; Cybersecurity Learner</span></p>
     <p class="location">Valenzuela City, Philippines<span class="clock-wrap" hidden> &middot; <span data-clock></span> local time</span></p>
     <p class="lede">I build web projects and am currently learning cybersecurity and Linux fundamentals. I’m still developing my knowledge through study and hands-on practice.</p>
@@ -22,7 +32,7 @@ require __DIR__ . '/includes/header.php';
   </div>
 </section>
 
-<section class="landing-section" id="projects" aria-labelledby="projects-title">
+<section class="section" id="projects" aria-labelledby="projects-title">
   <div class="page">
     <h2 class="page-title" id="projects-title">Projects</h2>
     <p class="intro">A selection of things I’ve built and the tools behind them.</p>
@@ -34,11 +44,11 @@ require __DIR__ . '/includes/header.php';
         <p>New projects will be added here.</p>
       </div>
     <?php endif; ?>
-    <p class="more"><a class="link" href="projects.php">See all project details</a></p>
   </div>
 </section>
 
-<?php require __DIR__ . '/includes/about-section.php'; ?>
-<?php require __DIR__ . '/includes/contact-section.php'; ?>
+<?php require __DIR__ . '/includes/section-about.php'; ?>
+
+<?php require __DIR__ . '/includes/section-contact.php'; ?>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>

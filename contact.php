@@ -1,9 +1,4 @@
 <?php
-require __DIR__ . '/includes/contact-state.php';
-$title = 'Contact';
-require __DIR__ . '/includes/header.php';
-?>
-
-<?php require __DIR__ . '/includes/contact-section.php'; ?>
-
-<?php require __DIR__ . '/includes/footer.php'; ?>
+$q = $_SERVER['QUERY_STRING'] ?? '';
+header('Location: index.php' . ($q !== '' ? '?' . $q : '') . '#contact', true, 302);
+exit;

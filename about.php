@@ -1,5 +1,3 @@
-<?php $title = 'About'; require __DIR__ . '/includes/header.php'; ?>
-
-<?php require __DIR__ . '/includes/about-section.php'; ?>
-
-<?php require __DIR__ . '/includes/footer.php'; ?>
+<?php
+header('Location: index.php#about', true, 302);
+exit;

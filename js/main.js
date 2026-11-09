@@ -144,25 +144,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Keep the navigation compact while scrolling and update its progress line.
   const nav = document.querySelector('.nav');
-  const navLinks = [...document.querySelectorAll('[data-section-link]')];
-  const sections = navLinks
-    .map((link) => document.getElementById(link.dataset.sectionLink))
-    .filter((section) => section !== null);
   const bar = () => {
     const h = root.scrollHeight - root.clientHeight;
     const scrollY = window.scrollY || root.scrollTop;
     root.style.setProperty('--p', h > 0 ? (scrollY / h).toFixed(3) : 0);
     if (nav) nav.classList.toggle('scrolled', scrollY > 24);
+    root.style.setProperty('--hs', Math.min(1, scrollY / (window.innerHeight * .75)).toFixed(3));
     if (toTop) toTop.classList.toggle('show', scrollY > 500);
-    if (sections.length) {
-      const marker = (nav ? nav.getBoundingClientRect().height : 0) + window.innerHeight * .35;
-      let active = sections[0];
-      sections.forEach((section) => { if (section.getBoundingClientRect().top <= marker) active = section; });
-      navLinks.forEach((link) => {
-        if (link.dataset.sectionLink === active.id) link.setAttribute('aria-current', 'page');
-        else link.removeAttribute('aria-current');
-      });
-    }
   };
   bar();
   window.addEventListener('scroll', bar, { passive: true });
@@ -260,8 +248,60 @@ document.addEventListener('DOMContentLoaded', () => {
     clock.closest('.clock-wrap').hidden = false;
   }
 
-  // Back to top
-  if (toTop) toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: calm ? 'auto' : 'smooth' }));
+  // ---- One page: smooth jumps between sections, section spy, parallax ----
+  const secs = ['home', 'projects', 'about', 'contact'].map((id) => document.getElementById(id)).filter(Boolean);
+  const spyLinks = [...document.querySelectorAll('.nav-links a, .rail-nav a')];
+  const hashOf = (a) => { try { return new URL(a.getAttribute('href'), location.href).hash.slice(1); } catch (e) { return ''; } };
+  const bare = (p) => p.replace(/index\.php$/, '');
+  const easeIO = (t) => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  let sRaf = 0;
+  const goTo = (y) => {
+    cancelAnimationFrame(sRaf);
+    const y0 = window.scrollY, dist = y - y0;
+    const dur = calm ? 0 : Math.min(1500, Math.max(700, Math.abs(dist) * .5));
+    if (!dur || Math.abs(dist) < 2) { window.scrollTo(0, y); return; }
+    let s = null;
+    const step = (now) => {
+      if (s === null) s = now;
+      const k = Math.min(1, (now - s) / dur);
+      window.scrollTo(0, y0 + dist * easeIO(k));
+      if (k < 1) sRaf = requestAnimationFrame(step);
+    };
+    sRaf = requestAnimationFrame(step);
+  };
+  ['wheel', 'touchstart', 'keydown'].forEach((ev) => window.addEventListener(ev, () => cancelAnimationFrame(sRaf), { passive: true }));
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button || a.target === '_blank') return;
+    const u = new URL(a.href, location.href);
+    if (!u.hash || u.origin !== location.origin || bare(u.pathname) !== bare(location.pathname)) return;
+    const id = u.hash.slice(1), el = document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    goTo(id === 'home' ? 0 : Math.max(0, el.getBoundingClientRect().top + window.scrollY - (nav ? nav.offsetHeight : 0) - 8));
+    history.replaceState(null, '', id === 'home' ? location.pathname + location.search : '#' + id);
+  });
+  if (toTop) toTop.addEventListener('click', () => goTo(0));
+
+  let current = '';
+  const spy = () => {
+    const mid = window.scrollY + window.innerHeight * .4;
+    let id = secs.length ? secs[0].id : '';
+    secs.forEach((s) => { if (s.getBoundingClientRect().top + window.scrollY <= mid) id = s.id; });
+    if (secs.length && window.innerHeight + window.scrollY >= root.scrollHeight - 4) id = secs[secs.length - 1].id;
+    if (id === current) return;
+    current = id;
+    spyLinks.forEach((l) => { if (hashOf(l) === id) l.setAttribute('aria-current', 'true'); else l.removeAttribute('aria-current'); });
+  };
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { spy(); ticking = false; });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
 
   // Targeting reticle: four brackets follow the pointer and lock onto links and buttons
   if (canHover && !calm) {
@@ -291,12 +331,20 @@ document.addEventListener('DOMContentLoaded', () => {
     loop();
   }
 
-  // Soft light that follows the pointer across project cards
-  document.querySelectorAll('.project-card').forEach((card) => card.addEventListener('pointermove', (e) => {
-    const r = card.getBoundingClientRect();
-    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-  }));
+  // Soft light and a gentle tilt on project cards
+  document.querySelectorAll('.project-card').forEach((card) => {
+    card.addEventListener('pointermove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      if (e.pointerType === 'mouse' && !calm) {
+        card.style.setProperty('--tx', ((x - .5) * 6).toFixed(1) + 'deg');
+        card.style.setProperty('--ty', (-(y - .5) * 6).toFixed(1) + 'deg');
+      }
+    });
+    card.addEventListener('pointerleave', () => { card.style.removeProperty('--tx'); card.style.removeProperty('--ty'); });
+  });
 
   // Copy email, with a small toast
   const toast = document.createElement('div');
@@ -311,30 +359,35 @@ document.addEventListener('DOMContentLoaded', () => {
     say('Email copied');
   }));
 
-  // Fade between pages
-  document.addEventListener('click', (e) => {
-    const a = e.target.closest('a');
-    if (!a || calm || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
-    const u = new URL(a.href, location.href);
-    if (u.origin !== location.origin || a.target === '_blank' || a.hasAttribute('download') || (u.pathname === location.pathname && u.hash) || !/\.php$|\/$/.test(u.pathname)) return;
-    e.preventDefault();
-    document.body.classList.add('leaving');
-    setTimeout(() => { location.href = a.href; }, 220);
-  });
-  window.addEventListener('pageshow', (e) => { if (e.persisted) document.body.classList.remove('leaving'); });
-
-  // Scroll reveal
-  const targets = document.querySelectorAll(
-    '.landing-section .page-title, .landing-section .intro, .landing-section .project-card, ' +
-    '.landing-section .about .big, .landing-section .about .short, .landing-section .fields > div, ' +
-    '.landing-section .skill-group, .landing-section .cert-wrap, .landing-section .contact-details, ' +
-    '.landing-section .contact-message, .landing-section .contact-list li, .landing-section .more, ' +
-    '.index-list li, .project-card, .contact-list li, .more'
-  );
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-    targets.forEach((el, i) => { el.classList.add('reveal'); el.style.transitionDelay = (i % 4) * 70 + 'ms'; io.observe(el); });
+  // Reveal as you scroll: each group moves in its own way, one after another
+  const plan = [
+    ['.section .page-title', 'line'], ['.section .intro', 'up'],
+    ['.project-card', 'rise'], ['.projects-empty', 'pop'],
+    ['.about .big', 'blur'], ['.about .short', 'up'], ['.about .fields > div', 'left'],
+    ['.skills-title', 'line'], ['.skill-group', 'up'], ['.chip', 'pop'],
+    ['.cert-wrap', 'up'], ['.cert-caption', 'up'], ['.cert-meta', 'pop'],
+    ['.contact-details', 'left'], ['.contact-message', 'right'], ['.contact-list li', 'up'],
+    ['.contact-message > p', 'up'],
+    ['.contact-form > :not(.contact-trap):not([type="hidden"]):not(.form-status)', 'up'],
+    ['.footer .foot-brand', 'left'], ['.footer .socials li', 'pop']
+  ];
+  if ('IntersectionObserver' in window && !calm) {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      io.unobserve(el);
+      el.classList.add('in');
+      const delay = parseInt(el.style.getPropertyValue('--d'), 10) || 0;
+      setTimeout(() => { el.removeAttribute('data-r'); el.classList.remove('in'); el.style.removeProperty('--d'); }, 1500 + delay);
+    }), { threshold: .12, rootMargin: '0px 0px -6% 0px' });
+    plan.forEach(([sel, kind]) => {
+      document.querySelectorAll(sel).forEach((el) => {
+        if (el.hasAttribute('data-r')) return;
+        const n = [...el.parentElement.children].filter((c) => c.matches(sel)).indexOf(el);
+        el.setAttribute('data-r', kind);
+        el.style.setProperty('--d', Math.min(n, 6) * 90 + 'ms');
+        io.observe(el);
+      });
+    });
   }
 });
