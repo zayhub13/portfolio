@@ -11,16 +11,19 @@ $title = isset($title) ? $title . ' | Jai Ochoa' : 'Jai Ochoa | Full Stack Devel
   <title><?= h($title) ?></title>
   <meta name="description" content="I'm Jai Ochoa, a full stack developer and IT student sharing my web projects, skills, and learning journey.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://johnjairuh-portfolio.vercel.app/">
   <meta property="og:title" content="<?= h($title) ?>">
   <meta property="og:description" content="I'm Jai Ochoa, a full stack developer and IT student sharing my web projects, skills, and learning journey.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/zayhub13/portfolio/main/assets/hero.png">
+  <meta property="og:image" content="https://johnjairuh-portfolio.vercel.app/assets/hero.png">
+  <meta property="og:image:secure_url" content="https://johnjairuh-portfolio.vercel.app/assets/hero.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="736">
   <meta property="og:image:height" content="736">
   <meta property="og:image:alt" content="Anime-style illustration portrait from Jai Ochoa's portfolio">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<?= h($title) ?>">
   <meta name="twitter:description" content="I'm Jai Ochoa, a full stack developer and IT student sharing my web projects, skills, and learning journey.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/zayhub13/portfolio/main/assets/hero.png">
+  <meta name="twitter:image" content="https://johnjairuh-portfolio.vercel.app/assets/hero.png">
   <meta name="twitter:image:alt" content="Anime-style illustration portrait from Jai Ochoa's portfolio">
   <link rel="icon" type="image/svg+xml" href="<?= asset('assets/favicon.svg') ?>">
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
