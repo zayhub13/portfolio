@@ -38,9 +38,17 @@
         <div class="cert-viewport">
           <ul class="cert-track">
             <?php foreach ($certifications as $i => $cert): ?>
-              <li class="cert-card" data-title="<?= h($cert['title']) ?>" data-date="<?= h($cert['date']) ?>">
+              <li class="cert-card" data-title="<?= h($cert['title']) ?>" data-issuer="<?= h($cert['issuer']) ?>" data-date="<?= h($cert['date']) ?>">
                 <a href="assets/certificates/<?= h($cert['file']) ?>" target="_blank" rel="noopener" aria-label="Open full size: <?= h($cert['title']) ?>">
-                  <img src="assets/certificates/<?= h($cert['file']) ?>" alt="CodeSignal certificate: <?= h($cert['title']) ?>" loading="lazy" draggable="false">
+                  <?php if (($cert['format'] ?? '') === 'pdf'): ?>
+                    <span class="cert-pdf" aria-hidden="true">
+                      <span class="cert-pdf-label">PDF CERTIFICATE</span>
+                      <strong><?= h($cert['title']) ?></strong>
+                      <small>Open certificate &nearr;</small>
+                    </span>
+                  <?php else: ?>
+                    <img src="assets/certificates/<?= h($cert['file']) ?>" alt="<?= h($cert['issuer']) ?> certificate: <?= h($cert['title']) ?>" loading="lazy" draggable="false">
+                  <?php endif; ?>
                   <span class="cert-sheen" aria-hidden="true"></span>
                 </a>
               </li>
@@ -51,7 +59,7 @@
         </div>
         <div class="cert-caption" data-cert-caption aria-live="polite">
           <strong><?= h($certifications[0]['title']) ?></strong>
-          <small>CodeSignal &middot; <?= h($certifications[0]['date']) ?></small>
+          <small><?= h($certifications[0]['issuer']) ?><?= $certifications[0]['date'] !== '' ? ' &middot; ' . h($certifications[0]['date']) : '' ?></small>
         </div>
         <div class="cert-meta">
           <div class="cert-dots" aria-label="Choose a certificate">

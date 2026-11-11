@@ -182,7 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
       count.textContent = (active + 1) + ' / ' + n;
       if (announce) {
         cap.querySelector('strong').textContent = cards[active].dataset.title;
-        cap.querySelector('small').textContent = 'CodeSignal \u00b7 ' + cards[active].dataset.date;
+        const cert = cards[active].dataset;
+        cap.querySelector('small').textContent = cert.issuer + (cert.date ? ' \u00b7 ' + cert.date : '');
         cap.classList.remove('swap'); void cap.offsetWidth; cap.classList.add('swap');
       }
     };

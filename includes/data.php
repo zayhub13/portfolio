@@ -45,11 +45,14 @@ $skills = [
 ];
 
 $certifications = [
-  ['title' => 'Descriptive and Inferential Statistics with Python', 'date' => 'April 14, 2026', 'file' => 'python-statistics.png'],
-  ['title' => 'Python Libraries for Data Analysis', 'date' => 'April 8, 2026', 'file' => 'python-libraries-data-analysis.png'],
-  ['title' => 'Mastering SQL Functions and Clauses with Taylor Swift', 'date' => 'February 26, 2026', 'file' => 'sql-functions-clauses.png'],
-  ['title' => 'Learning SQL Joins with Taylor Swift', 'date' => 'February 16, 2026', 'file' => 'sql-joins.png'],
-  ['title' => 'Intro to SQL with Taylor Swift', 'date' => 'January 29, 2026', 'file' => 'intro-to-sql.png'],
+  ['title' => 'Exploring Internet of Things with Cisco Packet Tracer', 'issuer' => 'Cisco Networking Academy', 'date' => '', 'file' => 'Exploring_IoT_with_Cisco_Packet_Tracer_certificate_johnjairuhochoa-gmail-com_0d4d680f-2a15-4740-9e09-120b9c47781f.pdf', 'format' => 'pdf'],
+  ['title' => 'Exploring Networking with Cisco Packet Tracer', 'issuer' => 'Cisco Networking Academy', 'date' => '', 'file' => 'Exploring_Networking_with_Cisco_Packet_Tracer_certificate_johnjairuhochoa-gmail-com_eba14ab4-bad8-46b0-9c63-efcdd52dfb5c.pdf', 'format' => 'pdf'],
+  ['title' => 'Introduction to Packet Tracer', 'issuer' => 'Cisco Networking Academy', 'date' => '', 'file' => 'Introduction_to_Packet_Tracer_certificate_johnjairuhochoa-gmail-com_ac36d24c-4ede-4a6a-9d3b-c0bafa0f2b43.pdf', 'format' => 'pdf'],
+  ['title' => 'Descriptive and Inferential Statistics with Python', 'issuer' => 'CodeSignal', 'date' => 'April 14, 2026', 'file' => 'python-statistics.png'],
+  ['title' => 'Python Libraries for Data Analysis', 'issuer' => 'CodeSignal', 'date' => 'April 8, 2026', 'file' => 'python-libraries-data-analysis.png'],
+  ['title' => 'Mastering SQL Functions and Clauses with Taylor Swift', 'issuer' => 'CodeSignal', 'date' => 'February 26, 2026', 'file' => 'sql-functions-clauses.png'],
+  ['title' => 'Learning SQL Joins with Taylor Swift', 'issuer' => 'CodeSignal', 'date' => 'February 16, 2026', 'file' => 'sql-joins.png'],
+  ['title' => 'Intro to SQL with Taylor Swift', 'issuer' => 'CodeSignal', 'date' => 'January 29, 2026', 'file' => 'intro-to-sql.png'],
 ];
 
 $projects = [
