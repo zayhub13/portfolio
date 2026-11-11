@@ -296,6 +296,36 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   if (toTop) toTop.addEventListener('click', () => goTo(0));
 
+  const projectDialog = document.querySelector('[data-project-dialog]');
+  if (projectDialog) {
+    const projectContent = projectDialog.querySelector('[data-project-dialog-content]');
+    const projectTemplates = new Map(
+      [...document.querySelectorAll('template[data-project-details]')]
+        .map((template) => [template.dataset.projectDetails, template])
+    );
+    document.querySelectorAll('[data-project-open]').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const template = projectTemplates.get(trigger.dataset.projectOpen);
+        if (!template) {
+          console.error('Project details are missing for:', trigger.dataset.projectOpen);
+          return;
+        }
+        projectContent.replaceChildren(template.content.cloneNode(true));
+        projectDialog.showModal();
+      });
+    });
+    projectDialog.querySelector('[data-project-dialog-close]').addEventListener('click', () => projectDialog.close());
+    projectDialog.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        projectDialog.close();
+      }
+    });
+    projectDialog.addEventListener('click', (event) => {
+      if (event.target === projectDialog) projectDialog.close();
+    });
+  }
+
   let current = '';
   const spy = () => {
     const mid = window.scrollY + window.innerHeight * .4;

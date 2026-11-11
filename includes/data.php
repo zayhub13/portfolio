@@ -78,4 +78,18 @@ $projects = [
     'stack' => 'Java',
     'github_url' => 'https://github.com/Miitsunoo/-M4-M1WithPaymentFramework',
   ],
+  [
+    'slug' => 'jakes-cellphone-repair-shop',
+    'name' => "Jake's Cellphone Repair Shop",
+    'description' => 'A cellphone repair website for submitting service requests, tracking repairs, and managing shop operations.',
+    'details' => 'Customers can choose a repair type, submit a request, and follow its status using a service reference. Staff can manage repair jobs and related shop records from an admin panel.',
+    'highlights' => [
+      'Repair request flow covering screen, battery, software, charging, water damage, audio, camera, and other issues.',
+      'Service reference lookup for checking repair status online.',
+      'Staff tools for managing jobs, customers, devices, inventory, suppliers, and reports.',
+    ],
+    'stack' => 'PHP, MySQL, JavaScript, HTML, CSS',
+    'image' => 'assets/projects/jakes-cellphone-repair-shop.png',
+    'github_url' => 'https://github.com/zayhub13/jake-repair-shop',
+  ],
 ];
