@@ -1,5 +1,3 @@
-# https://johnjairuh-portfolio.vercel.app/
-# JOHN JAIRUH L. OCHOA
 
 # Portfolio contact mail setup
 
