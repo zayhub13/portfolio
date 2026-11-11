@@ -163,6 +163,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const count = carousel.querySelector('[data-cert-count]');
     const cap = carousel.querySelector('[data-cert-caption]');
     const view = carousel.querySelector('.cert-viewport');
+    const lightbox = carousel.parentElement.querySelector('[data-cert-lightbox]');
+    const lightboxImage = lightbox.querySelector('[data-cert-lightbox-image]');
     const n = cards.length;
     let active = 0, dragged = false;
     const place = (announce) => {
@@ -192,7 +194,17 @@ document.addEventListener('DOMContentLoaded', () => {
     carousel.querySelector('[data-cert-prev]').addEventListener('click', () => show(active - 1));
     carousel.querySelector('[data-cert-next]').addEventListener('click', () => show(active + 1));
     dots.forEach((d) => d.addEventListener('click', () => show(Number(d.dataset.certDot))));
-    cards.forEach((c, i) => c.addEventListener('click', (e) => { if (i !== active) { e.preventDefault(); show(i); } }));
+    cards.forEach((c, i) => c.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (i !== active) { show(i); return; }
+      const link = c.querySelector('a');
+      lightboxImage.src = link.href;
+      lightboxImage.alt = c.querySelector('img').alt;
+      lightbox.setAttribute('aria-label', c.dataset.title);
+      lightbox.showModal();
+    }));
+    lightbox.querySelector('[data-cert-lightbox-close]').addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.close(); });
     carousel.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowLeft') { e.preventDefault(); show(active - 1); }
       if (e.key === 'ArrowRight') { e.preventDefault(); show(active + 1); }

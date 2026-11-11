@@ -39,16 +39,8 @@
           <ul class="cert-track">
             <?php foreach ($certifications as $i => $cert): ?>
               <li class="cert-card" data-title="<?= h($cert['title']) ?>" data-issuer="<?= h($cert['issuer']) ?>" data-date="<?= h($cert['date']) ?>">
-                <a href="assets/certificates/<?= h($cert['file']) ?>" target="_blank" rel="noopener" aria-label="Open full size: <?= h($cert['title']) ?>">
-                  <?php if (($cert['format'] ?? '') === 'pdf'): ?>
-                    <span class="cert-pdf" aria-hidden="true">
-                      <span class="cert-pdf-label">PDF CERTIFICATE</span>
-                      <strong><?= h($cert['title']) ?></strong>
-                      <small>Open certificate &nearr;</small>
-                    </span>
-                  <?php else: ?>
-                    <img src="assets/certificates/<?= h($cert['file']) ?>" alt="<?= h($cert['issuer']) ?> certificate: <?= h($cert['title']) ?>" loading="lazy" draggable="false">
-                  <?php endif; ?>
+                <a href="<?= asset('assets/certificates/' . $cert['file']) ?>" aria-label="Enlarge: <?= h($cert['title']) ?>">
+                  <img src="<?= asset('assets/certificates/' . $cert['file']) ?>" alt="<?= h($cert['issuer']) ?> certificate: <?= h($cert['title']) ?>" loading="lazy" draggable="false">
                   <span class="cert-sheen" aria-hidden="true"></span>
                 </a>
               </li>
@@ -70,6 +62,10 @@
           <span class="cert-count" data-cert-count aria-live="polite">1 / <?= count($certifications) ?></span>
         </div>
       </section>
+      <dialog class="cert-lightbox" data-cert-lightbox aria-label="Enlarged certificate">
+        <button type="button" class="cert-lightbox-close" data-cert-lightbox-close aria-label="Close enlarged certificate">&times;</button>
+        <img data-cert-lightbox-image alt="">
+      </dialog>
     </div>
   <?php endif; ?>
   </div>

@@ -180,12 +180,13 @@ dd { margin: 0; min-width: 0; font: 400 1.1rem / 1.65 var(--serif); }
 .cert-card:not(.is-active) { cursor: pointer; }
 .cert-card a { position: relative; display: block; width: 100%; height: 100%; overflow: hidden; border: 1px solid var(--rule); background: #fff; box-shadow: 0 1.4rem 2.6rem rgba(0, 0, 0, .25); transform: perspective(900px) rotateX(var(--ty, 0deg)) rotateY(var(--tx, 0deg)); transition: transform .3s ease-out; }
 .cert-card img { display: block; width: 100%; height: 100%; object-fit: contain; user-select: none; }
-.cert-pdf { display: grid; align-content: center; justify-items: center; gap: .75rem; width: 100%; height: 100%; padding: 1.5rem; color: var(--ink); background: var(--paper); text-align: center; }
-.cert-pdf-label { padding: .3rem .6rem; border: 1px solid var(--rule); color: var(--muted); font: 700 .75rem var(--sans); letter-spacing: .12em; }
-.cert-pdf strong { max-width: 22rem; font: 600 clamp(1.1rem, 3vw, 1.65rem) / 1.25 var(--serif); }
-.cert-pdf small { color: var(--muted); font: 600 .9rem var(--sans); }
 .cert-sheen { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(105deg, transparent calc(var(--gx, 50%) - 16%), rgba(255, 255, 255, .6) var(--gx, 50%), transparent calc(var(--gx, 50%) + 16%)); transition: opacity .3s; }
 .cert-card.is-active:hover .cert-sheen { opacity: 1; }
+.cert-lightbox { position: fixed; max-width: min(96vw, 72rem); max-height: 94vh; max-height: 94dvh; padding: 3.5rem 1rem 1rem; overflow: auto; border: 1px solid var(--rule); color: var(--ink); background: var(--paper); box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, .45); }
+.cert-lightbox::backdrop { background: rgba(5, 8, 15, .82); backdrop-filter: blur(5px); }
+.cert-lightbox img { display: block; max-width: calc(96vw - 2rem); max-height: calc(94vh - 5rem); max-height: calc(94dvh - 5rem); object-fit: contain; }
+.cert-lightbox-close { position: absolute; top: .5rem; right: .5rem; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 1px solid var(--rule); color: var(--ink); background: var(--paper); font: 400 1.8rem / 1 var(--sans); cursor: pointer; }
+.cert-lightbox-close:hover { color: var(--hover-fg); background: var(--hover-bg); }
 .cert-arrow { position: absolute; z-index: 20; top: calc(1.4rem + var(--w) * .375); display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 1px solid var(--rule); color: var(--ink); background: var(--paper); font: 600 1.25rem/1 var(--sans); cursor: pointer; transform: translateY(-50%); transition: color .25s, background .25s, transform .3s cubic-bezier(.2, .7, .2, 1); }
 .cert-prev { left: .25rem; } .cert-next { right: .25rem; }
 .cert-prev:hover { color: var(--hover-fg); background: var(--hover-bg); transform: translate(-4px, -50%); }
