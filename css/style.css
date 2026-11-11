@@ -182,10 +182,10 @@ dd { margin: 0; min-width: 0; font: 400 1.1rem / 1.65 var(--serif); }
 .cert-card img { display: block; width: 100%; height: 100%; object-fit: contain; user-select: none; }
 .cert-sheen { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: linear-gradient(105deg, transparent calc(var(--gx, 50%) - 16%), rgba(255, 255, 255, .6) var(--gx, 50%), transparent calc(var(--gx, 50%) + 16%)); transition: opacity .3s; }
 .cert-card.is-active:hover .cert-sheen { opacity: 1; }
-.cert-lightbox { position: fixed; max-width: min(96vw, 72rem); max-height: 94vh; max-height: 94dvh; padding: 3.5rem 1rem 1rem; overflow: auto; border: 1px solid var(--rule); color: var(--ink); background: var(--paper); box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, .45); }
+.cert-lightbox { position: fixed; inset: 0; width: min(94vw, 72rem); height: min(92vh, 52rem); height: min(92dvh, 52rem); max-width: none; max-height: none; margin: auto; padding: 0; overflow: hidden; border: 1px solid var(--rule); color: var(--ink); background: var(--paper); box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, .45); }
 .cert-lightbox::backdrop { background: rgba(5, 8, 15, .82); backdrop-filter: blur(5px); }
-.cert-lightbox img { display: block; max-width: calc(96vw - 2rem); max-height: calc(94vh - 5rem); max-height: calc(94dvh - 5rem); object-fit: contain; }
-.cert-lightbox-close { position: absolute; top: .5rem; right: .5rem; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 1px solid var(--rule); color: var(--ink); background: var(--paper); font: 400 1.8rem / 1 var(--sans); cursor: pointer; }
+.cert-lightbox img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.cert-lightbox-close { position: absolute; z-index: 1; top: .5rem; right: .5rem; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 1px solid var(--rule); color: var(--ink); background: var(--paper); font: 400 1.8rem / 1 var(--sans); cursor: pointer; }
 .cert-lightbox-close:hover { color: var(--hover-fg); background: var(--hover-bg); }
 .cert-arrow { position: absolute; z-index: 20; top: calc(1.4rem + var(--w) * .375); display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 1px solid var(--rule); color: var(--ink); background: var(--paper); font: 600 1.25rem/1 var(--sans); cursor: pointer; transform: translateY(-50%); transition: color .25s, background .25s, transform .3s cubic-bezier(.2, .7, .2, 1); }
 .cert-prev { left: .25rem; } .cert-next { right: .25rem; }
