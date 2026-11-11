@@ -131,7 +131,9 @@ h1 { font: 600 clamp(2.2rem, 8vw, 5.5rem) / 1.05 var(--serif); letter-spacing: -
 /* Projects */
 .project-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: .8rem; }
 .project-card { position: relative; min-height: 12rem; overflow: hidden; border: 1px solid var(--rule); transition: transform .35s cubic-bezier(.2,.7,.2,1), background .3s, color .3s, box-shadow .35s; }
-.project-card-trigger { position: relative; z-index: 1; display: flex; width: 100%; min-height: inherit; flex-direction: column; align-items: flex-start; padding: 1rem; border: 0; color: inherit; background: transparent; font: inherit; text-align: left; cursor: pointer; }
+.project-card-trigger, .project-card-content { position: relative; z-index: 1; display: flex; width: 100%; min-height: inherit; flex-direction: column; align-items: flex-start; padding: 1rem; }
+.project-card-trigger { border: 0; color: inherit; background: transparent; font: inherit; text-align: left; cursor: pointer; }
+.project-card-content { height: 100%; }
 .project-card-trigger:focus-visible { outline-offset: -4px; }
 .project-card::before { content: ""; position: absolute; inset: 0 auto auto 0; width: 100%; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
 .project-card:hover::before, .project-card:focus-within::before { transform: scaleX(1); }
@@ -144,6 +146,7 @@ h1 { font: 600 clamp(2.2rem, 8vw, 5.5rem) / 1.05 var(--serif); letter-spacing: -
 .project-details-cta { display: flex; align-items: center; gap: .45rem; margin-top: auto; padding-top: .8rem; font-weight: 600; }
 .project-details-cta span { transition: transform .25s; }
 .project-card:hover .project-details-cta span, .project-card:focus-within .project-details-cta span { transform: translateX(4px); }
+.project-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: auto; padding-top: .8rem; }
 .project-github { display: inline-flex; align-items: center; gap: .5rem; font-weight: 600; text-decoration: none; }
 .project-github svg { width: 1.35rem; height: 1.35rem; }
 .project-github { transition: gap .25s, opacity .25s; }
